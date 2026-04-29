@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+:root {
+  --bg-ink: #040711;
+  --bg-night: #0a1021;
+  --bg-glow: rgba(94, 120, 255, 0.16);
+  --panel-edge: rgba(255, 255, 255, 0.14);
+  --panel-surface: rgba(8, 14, 30, 0.64);
+  --panel-shadow: rgba(0, 0, 0, 0.48);
+  --text-primary: #f8f3e9;
+  --text-muted: rgba(239, 231, 213, 0.7);
+  --accent-gold: #f1d29a;
+  --accent-amber: #f5bd60;
+  --accent-rose: rgba(255, 181, 142, 0.14);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(72, 96, 180, 0.18), transparent 32%),
+    radial-gradient(circle at 80% 18%, rgba(233, 164, 79, 0.12), transparent 26%),
+    radial-gradient(circle at 50% 75%, rgba(82, 105, 189, 0.12), transparent 28%),
+    linear-gradient(180deg, #0b1122 0%, #040711 48%, #010207 100%);
+  font-family:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Baskerville",
+    "Georgia", "STKaiti", "KaiTi", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(245, 189, 96, 0.28);
+  color: #fff8eb;
+}
+
+.page-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page-shell::before,
+.page-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page-shell::before {
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.28) 0 1px, transparent 1.6px) 0 0 / 160px 160px,
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.18) 0 1px, transparent 1.4px) 80px 30px / 220px 220px,
+    radial-gradient(circle at center, rgba(245, 213, 154, 0.22) 0 1px, transparent 1.8px) 30px 80px / 260px 260px;
+  opacity: 0.48;
+}
+
+.page-shell::after {
+  background:
+    radial-gradient(circle at 50% 12%, rgba(245, 196, 129, 0.12), transparent 22%),
+    radial-gradient(circle at 52% 120%, rgba(35, 47, 88, 0.52), transparent 42%);
+  filter: blur(24px);
+  opacity: 0.9;
+}
+
+.orbit-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(42px);
+  opacity: 0.75;
+  animation: driftGlow 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.panel-shell {
+  border: 1px solid var(--panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 22%),
+    var(--panel-surface);
+  box-shadow:
+    0 24px 80px var(--panel-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+}
+
+.gold-ring {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 205, 126, 0.36),
+      rgba(95, 122, 255, 0.2),
+      rgba(255, 255, 255, 0.16)
+    );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.star-divider {
+  height: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 210, 154, 0.42),
+      transparent
+    );
+}
+
+@keyframes driftGlow {
+  0% {
+    transform: translate3d(-20px, 0, 0) scale(0.96);
+  }
+  100% {
+    transform: translate3d(26px, -18px, 0) scale(1.08);
+  }
+}
+
+@keyframes pulseSoft {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.04);
+  }
+}
+
+.pulse-soft {
+  animation: pulseSoft 7s ease-in-out infinite;
+}
